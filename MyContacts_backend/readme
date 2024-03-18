@@ -1,0 +1,3 @@
+to run server on nodemon we write in package json file -  npm run dev
+
+install  mongoose - npm i mongoose
