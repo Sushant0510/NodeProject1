@@ -2,7 +2,7 @@ exports.constants={
 
     VALIDATION_ERROR:400,
     UNAUTORISED:401,
-    FORBOIDDEN:403,
+    FORBIDDEN:403,
     NOT_FOUND:404,
     SERVER_ERROR:500
 }

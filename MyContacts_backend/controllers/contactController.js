@@ -3,11 +3,13 @@ const Contact= require('../models/contactModel');
 
 const asyncHandler= require("express-async-handler");
 
+//@access private
 const getContact= asyncHandler(async (req,res)=>{
-    const contacts=  await Contact.find();
+    const contacts=  await Contact.find({user_id:req.user.id});
     res.status(200).json(contacts);
 });
 
+//@access private
 const getContactById = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
 
@@ -23,6 +25,7 @@ const getContactById = asyncHandler(async (req, res) => {
 
 // const Contact = require('../models/Contact'); // Assuming you have a Contact model defined
 
+//@access private
 const createContact = asyncHandler(async (req, res) => {
   console.log('The request body is', req.body);
   const { name, email, phone } = req.body;
@@ -39,6 +42,7 @@ const createContact = asyncHandler(async (req, res) => {
       name,
       email,
       phone,
+      user_id:req.user.id
     });
 
     // Save the new contact to the database
@@ -59,6 +63,7 @@ const createContact = asyncHandler(async (req, res) => {
 module.exports = createContact;
 
 
+//@access private
 const updateContact = asyncHandler(async (req, res) => {
   try {
     const contactId = req.params.id.trim();
@@ -96,6 +101,7 @@ const updateContact = asyncHandler(async (req, res) => {
 
 
 
+//@access private
 const deleteContact = asyncHandler(async (req, res) => {
   try {
     // const contactId = req.params.id;
