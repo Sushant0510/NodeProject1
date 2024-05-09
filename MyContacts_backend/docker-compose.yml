@@ -1,0 +1,23 @@
+version: "2.27.0"
+
+services:
+  mongo_db:
+    container_name: databas_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db 
+
+  node_app:
+    build: .
+    ports:
+     - 5001:5001
+    environment:
+      port: 5001
+      CONNECTION_STRING: mongodb://mongo_db:27017/My_Contacts
+      ACCESS_TOKEN_SECRET: test123
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db: {}

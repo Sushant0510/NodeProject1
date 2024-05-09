@@ -3,11 +3,17 @@ const dotenv=require("dotenv").config();
 const errorHandler= require("./middleware/errorHandler");
 const connectDb = require('./config/dbConnection');
 const app=express();
-const port= process.env.port||5000;
+const port= process.env.port
 
 
 connectDb();
 app.use(express.json());
+
+
+// Define a route to check if the app is running
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "App is running" });
+});
 
 app.use("/api/contacts",require("./routes/contacRoute"));
 app.use("/api/users",require("./routes/userRoute"));
